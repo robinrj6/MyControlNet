@@ -95,9 +95,15 @@ class FrozenCLIPEmbedder(AbstractEncoder):
     def __init__(self, version="openai/clip-vit-large-patch14", device="cuda", max_length=77,
                  freeze=True, layer="last", layer_idx=None):  # clip-vit-base-patch32
         super().__init__()
+        import os
+        os.environ['TRANSFORMERS_OFFLINE'] = '0'
         assert layer in self.LAYERS
-        self.tokenizer = CLIPTokenizer.from_pretrained(version)
-        self.transformer = CLIPTextModel.from_pretrained(version)
+        try:
+            self.tokenizer = CLIPTokenizer.from_pretrained(version, cache_dir="/tmp/hf_cache", local_files_only=False)
+            self.transformer = CLIPTextModel.from_pretrained(version, cache_dir="/tmp/hf_cache", local_files_only=False)
+        except Exception as e:
+            print(f"Error loading from {version}, trying alternative...")
+            raise e
         self.device = device
         self.max_length = max_length
         if freeze:
