@@ -1,4 +1,9 @@
+## Setup Conda Environment
+    conda env create -f environment.yaml
+    conda activate control
+
 ## For Training
+
 1. download the Fill50K dataset
 2. extract to `/training` 
 3. try running `python tutorial_dataset_test.py`, if output with shape of the dataset, go ahead
