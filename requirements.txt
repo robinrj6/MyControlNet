@@ -1,7 +1,7 @@
-# Core dependencies
-numpy==1.23.1
-torch==1.12.1
-torchvision==0.13.1
+# Core dependencies (Colab-compatible, close to ControlNet paper versions)
+numpy>=1.23.1,<2.0
+torch>=1.12.0,<2.0
+torchvision>=0.13.0,<0.15
 
 # Gradio and UI
 gradio==3.16.2
