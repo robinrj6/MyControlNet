@@ -97,24 +97,24 @@ class FrozenCLIPEmbedder(AbstractEncoder):
         super().__init__()
         import os
         os.environ['TRANSFORMERS_OFFLINE'] = '0'
-        os.environ['HF_HOME'] = '/kaggle/working'  # Use writable temp directory for Kaggle
+        os.environ['HF_HOME'] = '/kaggle/input/notebooks/metric/openai-clip-vit-large-patch14/ViT-L-14.pt'  # Use writable temp directory for Kaggle
         assert layer in self.LAYERS
         try:
-            self.tokenizer = CLIPTokenizer.from_pretrained(version, cache_dir="/kaggle/working", local_files_only=False)
-            self.transformer = CLIPTextModel.from_pretrained(version, cache_dir="/kaggle/working", local_files_only=False)
+            self.tokenizer = CLIPTokenizer.from_pretrained(version, cache_dir="/kaggle/input/notebooks/metric/openai-clip-vit-large-patch14/ViT-L-14.pt", local_files_only=False)
+            self.transformer = CLIPTextModel.from_pretrained(version, cache_dir="/kaggle/input/notebooks/metric/openai-clip-vit-large-patch14/ViT-L-14.pt", local_files_only=False)
         except Exception as e:
             print(f"Error loading from {version}, trying alternative...")
             # Try with local_files_only=True first, then fallback to alternative model
             try:
-                self.tokenizer = CLIPTokenizer.from_pretrained(version, cache_dir="/kaggle/working", local_files_only=True)
-                self.transformer = CLIPTextModel.from_pretrained(version, cache_dir="/kaggle/working", local_files_only=True)
+                self.tokenizer = CLIPTokenizer.from_pretrained(version, cache_dir="/kaggle/input/notebooks/metric/openai-clip-vit-large-patch14/ViT-L-14.pt", local_files_only=True)
+                self.transformer = CLIPTextModel.from_pretrained(version, cache_dir="/kaggle/input/notebooks/metric/openai-clip-vit-large-patch14/ViT-L-14.pt", local_files_only=True)
                 print(f"Loaded from local cache")
             except:
                 # Fallback to smaller CLIP model
                 alt_version = "openai/clip-vit-base-patch32"
                 print(f"Attempting fallback to {alt_version}...")
-                self.tokenizer = CLIPTokenizer.from_pretrained(alt_version, cache_dir="/kaggle/working", local_files_only=False)
-                self.transformer = CLIPTextModel.from_pretrained(alt_version, cache_dir="/kaggle/working", local_files_only=False)
+                self.tokenizer = CLIPTokenizer.from_pretrained(alt_version, cache_dir="/kaggle/input/notebooks/metric/openai-clip-vit-large-patch14/ViT-L-14.pt", local_files_only=False)
+                self.transformer = CLIPTextModel.from_pretrained(alt_version, cache_dir="/kaggle/input/notebooks/metric/openai-clip-vit-large-patch14/ViT-L-14.pt", local_files_only=False)
         self.device = device
         self.max_length = max_length
         if freeze:
