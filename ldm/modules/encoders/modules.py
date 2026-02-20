@@ -99,10 +99,10 @@ class FrozenCLIPEmbedder(AbstractEncoder):
         os.environ['TRANSFORMERS_OFFLINE'] = '0'
         assert layer in self.LAYERS
         try:
-            # self.tokenizer = CLIPTokenizer.from_pretrained(version, cache_dir="/tmp/hf_cache", local_files_only=False)
-            # self.transformer = CLIPTextModel.from_pretrained(version, cache_dir="/tmp/hf_cache", local_files_only=False)
-            self.tokenizer = CLIPTokenizer.from_pretrained(version, cache_dir="/kaggle/working/hf_cache")
-            self.transformer = CLIPTextModel.from_pretrained(version, cache_dir="/kaggle/working/hf_cache")
+            self.tokenizer = CLIPTokenizer.from_pretrained(version, cache_dir="/tmp/hf_cache", local_files_only=False)
+            self.transformer = CLIPTextModel.from_pretrained(version, cache_dir="/tmp/hf_cache", local_files_only=False)
+            # self.tokenizer = CLIPTokenizer.from_pretrained(version, cache_dir="/kaggle/working/hf_cache")
+            # self.transformer = CLIPTextModel.from_pretrained(version, cache_dir="/kaggle/working/hf_cache")
         except Exception as e:
             print(f"Error loading from {version}, trying alternative...")
             raise e
